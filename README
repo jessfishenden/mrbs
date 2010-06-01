@@ -13,6 +13,9 @@ Some parts of this are based on WebCalender 0.9.4 by Craig Knudsen
 which is similar. There are fundamental design goal differences between
 WebCalendar and MRBS - WC is for individuals, MRBS is for meeting rooms.
 
+This version of MRBS is modifed for use by Vancouver Chinese Baptist Church.
+See README.vcbc for more information.
+
 ------
 To Use
 ------
