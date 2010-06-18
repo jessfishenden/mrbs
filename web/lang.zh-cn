@@ -112,6 +112,7 @@ $vocab["failed_to_acquire"]  = "无法读取资料库";
 // Authentication stuff
 $vocab["accessdenied"]       = "限制读取";
 $vocab["norights"]           = "您无权限修改此笔记录!!";
+$vocab["login_info"]         = "If you would like to book a room, please contact $mrbs_admin at <a href=\"mailto:$mrbs_admin_email\">$mrbs_admin_email</a>.";
 $vocab["please_login"]       = "请先登录";
 $vocab["users.name"]          = "名称";
 $vocab["users.password"]      = "密码";

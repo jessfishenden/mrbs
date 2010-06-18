@@ -112,6 +112,7 @@ $vocab["failed_to_acquire"]  = "無法存取資料庫";
 // Authentication stuff
 $vocab["accessdenied"]       = "限制存取";
 $vocab["norights"]           = "您無權利修改此筆記錄!!";
+$vocab["login_info"]         = "If you would like to book a room, please contact $mrbs_admin at <a href=\"mailto:$mrbs_admin_email\">$mrbs_admin_email</a>.";
 $vocab["please_login"]       = "請先登入";
 $vocab["users.name"]          = "名稱";
 $vocab["users.password"]      = "密碼";

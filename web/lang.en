@@ -154,6 +154,7 @@ $vocab["none_outstanding"]   = "You have no provisional bookings waiting to be a
 // Authentication stuff
 $vocab["accessdenied"]       = "Access Denied";
 $vocab["norights"]           = "You do not have access rights to modify this item.";
+$vocab["login_info"]         = "If you would like to book a room, please contact $mrbs_admin at <a href=\"mailto:$mrbs_admin_email\">$mrbs_admin_email</a>.";
 $vocab["please_login"]       = "Please log in";
 $vocab["users.name"]          = "Name";
 $vocab["users.password"]      = "Password";

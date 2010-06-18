@@ -127,6 +127,10 @@ function printLoginForm($TargetURL)
 <p>
   
 </p>
+<p>
+<?php echo get_vocab("login_info") ?>
+</p>
+
 <form class="form_general" id="logon" method="post" action="<?php echo htmlspecialchars(basename($PHP_SELF)) ?>">
   <fieldset>
   <legend><?php echo get_vocab("please_login") ?></legend>
