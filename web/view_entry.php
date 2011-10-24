@@ -175,6 +175,19 @@ $duration      = $row['duration'] - cross_dst($row['start_time'],
                                               $row['end_time']);
 $writeable     = getWritable($row['create_by'], $user, $room_id);
 
+$client_name          = htmlspecialchars($row['client_name']);
+$client_address          = htmlspecialchars($row['client_address']);
+$client_phone          = htmlspecialchars($row['client_phone']);
+$client_email          = htmlspecialchars($row['client_email']);
+$no_of_attendees          = $row['no_of_attendees'];
+$refreshments_required          = $row['refreshments_required'];
+$flipchart_required          = $row['flipchart_required'];
+$flipchart_paper_pack_required          = $row['flipchart_paper_pack_required'];
+$pen_pack_required          = $row['pen_pack_required'];
+$invoice_by_post          = $row['invoice_by_post'];
+$invoice_by_email          = $row['invoice_by_email'];
+
+
 
 // Get the area settings for the entry's area.   In particular we want
 // to know how to display private/public bookings in this area.

@@ -228,20 +228,10 @@ function mrbsCreateSingleEntry($starttime, $endtime, $entry_type, $repeat_id,
   global $tbl_entry;
  
   $private = $private ? 1 : 0;
-  $refreshments_required = $refreshments_required ? 1 : 0;
-  $flipchart_required = $flipchart_required ? 1 : 0;
-  $flipchart_paper_pack_required = $flipchart_paper_pack_required ? 1 : 0;
-  $pen_pack_required = $pen_pack_required ? 1 : 0;
-  $invoice_by_post = $invoice_by_post ? 1 : 0;
-  $invoice_by_email = $invoice_by_email ? 1 : 0;
   $name        = addslashes($name);
   $description = addslashes($description);
   $owner       = addslashes($owner);
   $type        = addslashes($type);
-
-//echo "refreshments required: ";
-//echo $refreshments_required;
-//die();
    
   // make sure that any entry is of a positive duration
   // this is to trap potential negative duration created when DST comes
@@ -256,9 +246,9 @@ function mrbsCreateSingleEntry($starttime, $endtime, $entry_type, $repeat_id,
                             VALUES ($starttime, $endtime, $entry_type, $repeat_id, $room_id,
                                     '$owner',     '$name',    '$type',       '$description', $private, $status, '$client_name', '$client_address', 
                                '$client_phone', '$client_email', '$no_of_attendees',
-                               $refreshments_required, $flipchart_required,
-                               $flipchart_paper_pack_required, $pen_pack_required,
-                               $invoice_by_post, $invoice_by_email)";
+                               '$refreshments_required', '$flipchart_required',
+                               '$flipchart_paper_pack_required', '$pen_pack_required',
+                               '$invoice_by_post', '$invoice_by_email')";
 
     if (sql_command($sql) < 0)
     {
@@ -300,11 +290,7 @@ function mrbsCreateSingleEntry($starttime, $endtime, $entry_type, $repeat_id,
  */
 function mrbsCreateRepeatEntry($starttime, $endtime, $rep_type, $rep_enddate,
                                $rep_opt, $room_id, $owner, $name, $type,
-                               $description, $rep_num_weeks, $private, $client_name, $client_address, 
-                               $client_phone, $client_email, $no_of_attendees,
-                               $refreshments_required, $flipchart_required,
-                               $flipchart_paper_pack_required, $pen_pack_required,
-                               $invoice_by_post, $invoice_by_email)
+                               $description, $rep_num_weeks, $private)
 {
   global $tbl_repeat;
 
@@ -328,18 +314,6 @@ function mrbsCreateRepeatEntry($starttime, $endtime, $rep_type, $rep_enddate,
   $sql_coln[] = 'type';       $sql_val[] = '\''.$type.'\'';
   $sql_coln[] = 'private';    $sql_val[] = $private;
   $sql_coln[] = 'name';       $sql_val[] = '\''.$name.'\'';
-  $sql_coln[] = 'client_name';       $sql_val[] = '\''.$client_name.'\'';
-  $sql_coln[] = 'client_address';       $sql_val[] = '\''.$client_address.'\'';
-  $sql_coln[] = 'client_phone';       $sql_val[] = '\''.$client_phone.'\'';
-  $sql_coln[] = 'client_email';       $sql_val[] = '\''.$client_email.'\'';
-  $sql_coln[] = 'no_of_attendees';       $sql_val[] = '\''.$no_of_attendees.'\'';
-  $sql_coln[] = 'refreshments_required';       $sql_val[] = '\''.$refreshments_required.'\'';
-  $sql_coln[] = 'flipchart_required';       $sql_val[] = '\''.$flipchart_required.'\'';
-  $sql_coln[] = 'flipchart_paper_pack_required';       $sql_val[] = '\''.$flipchart_paper_pack_required.'\'';
-  $sql_coln[] = 'pen_pack_required';       $sql_val[] = '\''.$pen_pack_required.'\'';
-  $sql_coln[] = 'invoice_by_post';       $sql_val[] = '\''.$invoice_by_post.'\'';
-  $sql_coln[] = 'invoice_by_email';       $sql_val[] = '\''.$invoice_by_email.'\'';
-
 
   // Optional things, pgsql doesn't like empty strings!
   if (!empty($rep_opt))
@@ -572,11 +546,7 @@ function mrbsGetRepeatEntryList($time, $enddate, $rep_type, $rep_opt,
 function mrbsCreateRepeatingEntrys($starttime, $endtime, $rep_type,
                                    $rep_enddate, $rep_opt, $room_id, $owner,
                                    $name, $type, $description, $rep_num_weeks,
-                                   $private, $status, $client_name, $client_address, 
-                               $client_phone, $client_email, $no_of_attendees,
-                               $refreshments_required, $flipchart_required,
-                               $flipchart_paper_pack_required, $pen_pack_required,
-                               $invoice_by_post, $invoice_by_email)
+                                   $private, $status)
 {
   global $max_rep_entrys;
   
@@ -597,11 +567,7 @@ function mrbsCreateRepeatingEntrys($starttime, $endtime, $rep_type,
   {
     $id = mrbsCreateSingleEntry($starttime, $endtime, 0, 0,
                                 $room_id, $owner, $name, $type,
-                                $description, $private, $status, $client_name, $client_address, 
-                               $client_phone, $client_email, $no_of_attendees,
-                               $refreshments_required, $flipchart_required,
-                               $flipchart_paper_pack_required, $pen_pack_required,
-                               $invoice_by_post, $invoice_by_email);
+                                $description, $private, $status);
     $result['id'] = $id;
     $result['series'] = FALSE;
     return $result;
@@ -610,11 +576,7 @@ function mrbsCreateRepeatingEntrys($starttime, $endtime, $rep_type,
   $id = mrbsCreateRepeatEntry($starttime, $endtime, $rep_type,
                               $rep_enddate, $rep_opt, $room_id,
                               $owner, $name, $type, $description,
-                              $rep_num_weeks, $private, $client_name, $client_address, 
-                               $client_phone, $client_email, $no_of_attendees,
-                               $refreshments_required, $flipchart_required,
-                               $flipchart_paper_pack_required, $pen_pack_required,
-                               $invoice_by_post, $invoice_by_email);
+                              $rep_num_weeks, $private);
     
   if ($id)
   {
@@ -635,18 +597,7 @@ function mrbsCreateRepeatingEntrys($starttime, $endtime, $rep_type,
                                       $type,
                                       $description,
                                       $private,
-                                      $status,
-                                      $client_name,
-                                      $client_address,
-                                      $client_phone,
-                                      $client_email,
-                                      $no_of_attendees,
-                                      $refreshments_required,
-                                      $flipchart_required,
-                                      $flipchart_paper_pack_required,
-                                      $pen_pack_required,
-                                      $invoice_by_post,
-                                      $invoice_by_email);
+                                      $status);
     }
   }
   $result['id'] = $id;
@@ -741,19 +692,6 @@ function mrbsGetBookingInfo($id, $series, $silent=FALSE)
             $tbl_repeat.type,
             $tbl_repeat.reminded,
             $tbl_repeat.private,
-
-            $tbl_entry.client_name,
-            $tbl_entry.client_address,
-            $tbl_entry.client_phone,
-            $tbl_entry.client_email,
-            $tbl_entry.no_of_attendees,
-            $tbl_entry.refreshments_required,
-            $tbl_entry.flipchart_required,
-            $tbl_entry.flipchart_paper_pack_required,
-            $tbl_entry.pen_pack_required,
-            $tbl_entry.invoice_by_post,
-            $tbl_entry.invoice_by_email,
-
             $tbl_repeat.room_id,
             " . sql_syntax_timestamp_to_unix("$tbl_repeat.timestamp") . " AS last_updated,
             ($tbl_repeat.end_time - $tbl_repeat.start_time) AS duration,
@@ -784,19 +722,6 @@ function mrbsGetBookingInfo($id, $series, $silent=FALSE)
             $tbl_entry.status,
             $tbl_entry.reminded,
             $tbl_entry.private,
-
-            $tbl_entry.client_name,
-            $tbl_entry.client_address,
-            $tbl_entry.client_phone,
-            $tbl_entry.client_email,
-            $tbl_entry.no_of_attendees,
-            $tbl_entry.refreshments_required,
-            $tbl_entry.flipchart_required,
-            $tbl_entry.flipchart_paper_pack_required,
-            $tbl_entry.pen_pack_required,
-            $tbl_entry.invoice_by_post,
-            $tbl_entry.invoice_by_email,
-
             $tbl_entry.room_id,
             " . sql_syntax_timestamp_to_unix("$tbl_entry.timestamp") . " AS last_updated,
             ($tbl_entry.end_time - $tbl_entry.start_time) AS duration,

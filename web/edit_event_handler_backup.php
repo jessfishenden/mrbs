@@ -49,18 +49,24 @@ $pen_pack_required = get_form_var('pen_pack_required', 'string');
 $invoice_by_post = get_form_var('invoice_by_post', 'string'); 
 $invoice_by_email = get_form_var('invoice_by_email', 'string'); 
 
-// Debugging section
+//
 
 // echo "client name: ";
 // echo $client_name;
-
-// echo "refreshments required: ";
-// echo $refreshments_required;
 // die();
 
 //
 
-
+$client_address = "specified manually in entry handler for testing";
+$client_phone = ""; 
+$client_email = ""; 
+$no_of_attendees = ""; 
+$refreshments_required = ""; 
+$flipchart_required = ""; 
+$flipchart_paper_pack_required = ""; 
+$pen_pack_required = ""; 
+$invoice_by_post = ""; 
+$invoice_by_email = ""; 
 
 // Truncate the name field to the maximum length as a precaution.
 // Although the MAXLENGTH attribute is used in the <input> tag, this can
@@ -683,7 +689,7 @@ echo "<a href=\"" . htmlspecialchars($returl) . "\">" . get_vocab("returncal") .
 echo "</p>\n";
 ?>
 
-<?php // echo $name; echo $client_name; ?>
+<?php echo $name; echo $client_name; ?>
 
 
 <?php

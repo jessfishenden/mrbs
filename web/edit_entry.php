@@ -82,7 +82,11 @@ $repeats_allowed = $is_admin || empty($auth['only_admin_can_book_repeat']);
 if (isset($id))
 {
   $sql = "SELECT name, create_by, description, start_time, end_time,
-                 type, room_id, entry_type, repeat_id, private
+                 type, room_id, entry_type, repeat_id, private,
+		   client_name, client_address, client_phone, client_email,
+		   no_of_attendees, refreshments_required, flipchart_required,
+		   flipchart_paper_pack_required, pen_pack_required, 
+		   invoice_by_post, invoice_by_email
             FROM $tbl_entry
            WHERE id=$id
            LIMIT 1";
@@ -121,6 +125,22 @@ if (isset($id))
   $entry_type  = $row['entry_type'];
   $rep_id      = $row['repeat_id'];
   $private     = $row['private'];
+
+
+  $client_name	= $row['client_name'];
+  $client_address	= $row['client_address'];
+  $client_phone	= $row['client_phone'];
+  $client_email	= $row['client_email'];
+  $no_of_attendees	= $row['no_of_attendees'];
+  $refreshments_required	= $row['refreshments_required'];
+  $flipchart_required	= $row['flipchart_required'];
+  $flipchart_paper_pack_required	= $row['flipchart_paper_pack_required'];
+  $pen_pack_required	= $row['pen_pack_required'];
+  $invoice_by_post	= $row['invoice_by_post'];
+  $invoice_by_email	= $row['invoice_by_email'];
+
+ 
+
 
   if ($private_mandatory) 
   {
@@ -215,6 +235,7 @@ else
   // It is a new booking. The data comes from whichever button the user clicked
   $edit_type   = "series";
   $name        = "";
+  $client_name = "";
   $create_by   = $user;
   $description = "";
   $start_day   = $day;
@@ -465,6 +486,22 @@ else
     $token = "addentry";
   }
 }
+
+
+
+          if($area == "2") 
+         {
+$refreshments_not_available = 1;
+$flipchart_not_available = 1;
+$flipchart_paper_pack_not_available = 1;
+$pen_pack_not_available = 1;
+$invoice_by_post_not_available = 1;
+$invoice_by_email_not_available = 1;
+          }
+
+// echo $refreshments_required;
+
+
 ?>
 
 
@@ -473,7 +510,15 @@ else
   <legend><?php echo get_vocab($token); ?></legend>
 
     <div id="div_name">
-      <label for="name"><?php echo get_vocab("namebooker")?>:</label>
+      <label for="name"><?php
+		if($area == "2")
+		{
+		echo get_vocab("entry.username");
+		}
+		else
+		{
+		echo get_vocab("namebooker");
+		} ?>:</label>
       <?php
       echo "<input id=\"name\" name=\"name\" maxlength=\"" . $maxlength['entry.name'] . "\" value=\"" . htmlspecialchars($name) . "\">\n";
       ?>
@@ -484,6 +529,175 @@ else
       <!-- textarea rows and cols are overridden by CSS height and width -->
       <textarea id="description" name="description" rows="8" cols="40"><?php echo htmlspecialchars ( $description ); ?></textarea>
     </div>
+
+	<?php
+	$input_disabled_string = "disabled=\"enabled\"";
+	if($area == "2") 
+	{
+		$client_name = $name;
+		$input_disabled_string = "disabled=\"disabled\"";
+	}
+	?>
+
+    <div id="div_client_name">
+      <label for="client_name"><?php echo get_vocab("entry.client_name")?>:</label>
+      <?php
+      echo "<input id=\"client_name\" name=\"client_name\" maxlength=\"" . $maxlength['entry.client_name'] . "\" value=\"" . htmlspecialchars($client_name) . "\">\n";
+      ?>
+    </div>
+
+    <div id="div_client_address">
+      <label for="client_addredd"><?php echo get_vocab("entry.client_address")?></label>
+      <!-- textarea rows and cols are overridden by CSS height and width -->
+      <textarea id="client_address" name="client_address" rows="8" cols="40"><?php echo htmlspecialchars ( $client_address ); ?></textarea>
+    </div>
+
+    <div id="div_client_phone">
+      <label for="client_phone"><?php echo get_vocab("entry.client_phone")?>:</label>
+      <?php
+      echo "<input id=\"client_phone\" name=\"client_phone\" maxlength=\"" . $maxlength['entry.client_phone'] . "\" value=\"" . htmlspecialchars($client_phone) . "\">\n";
+      ?>
+    </div>
+
+    <div id="div_client_email">
+      <label for="client_email"><?php echo get_vocab("entry.client_email")?>:</label>
+      <?php
+      echo "<input id=\"client_email\" name=\"client_email\" maxlength=\"" . $maxlength['entry.client_email'] . "\" value=\"" . htmlspecialchars($client_email) . "\">\n";
+      ?>
+    </div>
+
+    <div id="div_no_of_attendees">
+      <label for="no_of_attendees"><?php echo get_vocab("entry.no_of_attendees")?>:</label>
+      <?php
+      echo "<input id=\"no_of_attendees\" name=\"no_of_attendees\" maxlength=\"5\" value=\"" . htmlspecialchars($no_of_attendees) . "\">\n";
+      ?>
+    </div>
+
+<?php
+
+//echo "refreshments required: ";
+//echo $refreshments_required;
+//if($refreshments_required == 0) 
+//          {
+//            echo " checked=unchecked";
+//          }
+//          if($refreshments_required == 1) 
+//          {
+//            echo " checked=checked";
+//          }
+
+
+?>
+
+    <div id="div_refreshments_required">
+          <label for="refreshments_required"><?php echo get_vocab("entry.refreshments_required") ?></label>
+          <input id="refreshments_required" class="checkbox" name="refreshments_required" type="checkbox" value="yes"<?php 
+         if($refreshments_required == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($refreshments_required == 1) 
+          {
+            echo " checked=\"checked\"";
+
+          }
+          if($refreshments_not_available == 1) 
+         {
+          echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
+    <div id="div_flipchart_required">
+          <label for="flipchart_required"><?php echo get_vocab("entry.flipchart_required") ?></label>
+          <input id="flipchart_required" class="checkbox" name="flipchart_required" type="checkbox" value="yes"<?php 
+          if($flipchart_required == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($flipchart_required == 1) 
+          {
+            echo " checked=\"checked\"";
+          }
+          if($flipchart_not_available == 1) 
+         {
+            echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
+    <div id="div_flipchart_paper_pack_required">
+          <label for="flipchart_paper_pack_required"><?php echo get_vocab("entry.flipchart_paper_pack_required") ?></label>
+          <input id="flipchart_paper_pack_required" class="checkbox" name="flipchart_paper_pack_required" type="checkbox" value="yes"<?php 
+          if($flipchart_paper_pack_required == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($flipchart_paper_pack_required == 1) 
+          {
+            echo " checked=\"checked\"";
+          }
+          if($flipchart_paper_pack_not_available == 1) 
+         {
+            echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
+    <div id="div_pen_pack_required">
+          <label for="pen_pack_required"><?php echo get_vocab("entry.pen_pack_required") ?></label>
+          <input id="pen_pack_required" class="checkbox" name="pen_pack_required" type="checkbox" value="yes"<?php 
+          if($pen_pack_required == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($pen_pack_required == 1) 
+          {
+            echo " checked=\"checked\"";
+          }
+          if($pen_pack_not_available == 1) 
+         {
+            echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
+    <div id="div_invoice_by_post">
+          <label for="invoice_by_post"><?php echo get_vocab("entry.invoice_by_post") ?></label>
+          <input id="invoice_by_post" class="checkbox" name="invoice_by_post" type="checkbox" value="yes"<?php 
+          if($invoice_by_post == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($invoice_by_post == 1) 
+          {
+            echo " checked=\"checked\"";
+          }
+          if($invoice_by_post_not_available == 1) 
+         {
+            echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
+    <div id="div_invoice_by_email">
+          <label for="invoice_by_email"><?php echo get_vocab("entry.invoice_by_email") ?></label>
+          <input id="invoice_by_email" class="checkbox" name="invoice_by_email" type="checkbox" value="yes"<?php 
+          if($invoice_by_email == 0) 
+          {
+//            echo " checked=\"unchecked\"";
+          }
+          if($invoice_by_email == 1) 
+          {
+            echo " checked=\"checked\"";
+          }
+          if($invoice_by_email_not_available == 1) 
+         {
+            echo " disabled=\"true\"";
+          }
+          ?>>
+        </div>
+
 
     <div id="div_date">
       <label><?php echo get_vocab("date")?>:</label>

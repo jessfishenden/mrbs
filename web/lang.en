@@ -48,7 +48,7 @@ $vocab["copyentry"]          = "Copy Entry";
 $vocab["editseries"]         = "Edit Series";
 $vocab["copyseries"]         = "Copy Series";
 $vocab["namebooker"]         = "Brief Description";
-$vocab["fulldescription"]    = "Full Description:<br>&nbsp;&nbsp;(Number of people,<br>&nbsp;&nbsp;Internal/External etc)";
+$vocab["fulldescription"]    = "Full Description:";
 $vocab["date"]               = "Date";
 $vocab["start_date"]         = "Start Time";
 $vocab["end_date"]           = "End Time";
@@ -330,7 +330,21 @@ $vocab["min_book_ahead"]          = "Advance booking - minimum";
 $vocab["max_book_ahead"]          = "Advance booking - maximum";
 $vocab["custom_html"]             = "Custom HTML";
 $vocab["custom_html_note"]        = "This field can be used for displaying your own HTML, for example an embedded Google map";
-                     
+
+// Custom fields in mrbs_entry and mrbs_room
+$vocab["room.cost_per_hour"]		  = "Cost per hour (in pence)";
+$vocab["entry.client_phone"]             = "Client telephone number<br>&nbsp;&nbsp;(+44xxxxxxxxxx)";
+$vocab["entry.client_name"]       = "Client name";
+$vocab["entry.client_email"]      = "Client email address";
+$vocab["entry.client_address"]    = "Client address";
+$vocab["entry.no_of_attendees"]   = "Number of Attendees";
+$vocab["entry.refreshments_required"]           = "Refreshments required?";
+$vocab["entry.flipchart_required"] = "Flipchart stand required?";
+$vocab["entry.pen_pack_required"]     = "Flipchart pens required?";
+$vocab["entry.flipchart_paper_pack_required"]           = "Flipchart paper pack required?";
+$vocab["entry.invoice_by_post"]           = "Invoice by post?";
+$vocab["entry.invoice_by_email"]           = "Invoice by email?";
+$vocab["entry.username"]           = "Username";
 
 // Used in edit_users.php
 $vocab["name_empty"]         = "You must enter a name.";

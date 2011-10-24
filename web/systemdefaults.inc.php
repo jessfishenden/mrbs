@@ -59,12 +59,12 @@ $maxlength['users.email']      = 75;  // characters   (email field in users tabl
  * Site identification information
  *********************************/
 $mrbs_admin = "Your Administrator";
-$mrbs_admin_email = "admin_email@your.org";  // NOTE:  there are more email addresses in $mail_settings below
+$mrbs_admin_email = "admin+booking@oblongleeds.org.uk";  // NOTE:  there are more email addresses in $mail_settings below
 
 // The company name is mandatory.   It is used in the header and also for email notifications.
 // The company logo, additional information and URL are all optional.
 
-$mrbs_company = "Your Company";   // This line must always be uncommented ($mrbs_company is used in various places)
+$mrbs_company = "Oblong Resource Centre";   // This line must always be uncommented ($mrbs_company is used in various places)
 
 // Uncomment this next line to use a logo instead of text for your organisation in the header
 //$mrbs_company_logo = "your_logo.gif";    // name of your logo file.   This example assumes it is in the MRBS directory
@@ -73,7 +73,7 @@ $mrbs_company = "Your Company";   // This line must always be uncommented ($mrbs
 //$mrbs_company_more_info = "You can put additional information here";  // e.g. "XYZ Department"
 
 // Uncomment this next line to have a link to your organisation in the header
-//$mrbs_company_url = "http://www.your_organisation.com/";
+$mrbs_company_url = "http://www.oblongleeds.org.uk/";
 
 // This is to fix URL problems when using a proxy in the environment.
 // If links inside MRBS appear broken, then specify here the URL of
@@ -230,7 +230,7 @@ $periods[] = "Period&nbsp;2";
 // or Times are being used.
 
 // DEFAULT VALUES FOR NEW AREAS (WHEN USING TIMES)
-$min_book_ahead_enabled = FALSE;    // set to TRUE to enforce a minimum advance booking time
+$min_book_ahead_enabled = TRUE;    // set to TRUE to enforce a minimum advance booking time
 $max_book_ahead_enabled = FALSE;    // set to TRUE to enforce a maximum advance booking time
 
 // TIMES SETTINGS
@@ -257,7 +257,7 @@ $max_book_ahead_secs = 60*60*24*7;  // (seconds) no more than one week ahead
 // in advance".    However it can impose policies such as "users must book at least
 // one day in advance" and this is done by setting the two variables below.
 //
-$min_book_ahead_days = 0;   // (days) cannot book in the past
+$min_book_ahead_days = 1;   // (days) cannot book in the past
 $max_book_ahead_days = 7;   // (days) no more than one week ahead
 //
 // Currently MRBS does not store periods settings per area.   So the values above are
@@ -410,7 +410,7 @@ $highlight_method = "hybrid"; // One of "bgcolor", "class", "hybrid".   "hybrid"
 // details of the event.  Everyone else just sees that the time/period
 // is booked on the schedule.
 
-$private_enabled = FALSE;  // DEFAULT VALUE FOR NEW AREAS
+$private_enabled = TRUE;  // DEFAULT VALUE FOR NEW AREAS
            // Display checkbox in entry page to make
            // the booking private.
 
@@ -468,7 +468,7 @@ $auth["session"] = "php"; // How to get and keep the user ID. One of
            // "http" "php" "cookie" "ip" "host" "nt" "omni"
            // "remote_user"
 
-$auth["type"] = "config"; // How to validate the user/password. One of "none"
+$auth["type"] = "db"; // How to validate the user/password. One of "none"
                           // "config" "db" "db_ext" "pop3" "imap" "ldap" "nis"
                           // "nw" "ext".
 
@@ -518,9 +518,9 @@ $auth["admin"][] = "administrator"; // A user name from the user list. Useful
 
 // 'auth_config' user database
 // Format: $auth["user"]["name"] = "password";
-$auth["user"]["administrator"] = "secret";
-$auth["user"]["alice"] = "a";
-$auth["user"]["bob"] = "b";
+$auth["user"]["administrator"] = "hedgehog";
+$auth["user"]["alice"] = "alicebob";
+$auth["user"]["bob"] = "bobalice";
 
 // 'session_http' configuration settings
 $auth["realm"]  = "mrbs";
